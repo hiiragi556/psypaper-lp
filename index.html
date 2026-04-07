@@ -280,7 +280,13 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
     <div class="logo-box"><span>Ps</span></div>
     <span class="logo-name">PsyPaper</span>
   </a>
-  <a href="#contact" class="nav-cta">お問い合わせ</a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="https://hiiragi-lab.vercel.app" target="_blank" style="display:flex;align-items:center;gap:7px;text-decoration:none;background:rgba(61,138,98,0.12);border:1px solid rgba(61,138,98,0.3);border-radius:6px;padding:7px 14px;transition:background 0.2s;" onmouseover="this.style.background='rgba(61,138,98,0.22)'" onmouseout="this.style.background='rgba(61,138,98,0.12)'">
+      <span style="width:18px;height:18px;border-radius:4px;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0;">HL</span>
+      <span style="font-size:12px;color:var(--green);font-weight:600;">ひいらぎラボ</span>
+    </a>
+    <a href="#contact" class="nav-cta">お問い合わせ</a>
+  </div>
 </nav>
 
 <div style="background: var(--cream);">
@@ -295,7 +301,7 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
         「これだけの時間があれば、もっと患者さんと向き合えるのに。」<br><br>
         だから、自分で作った。
       </div>
-      <div class="hero-author">月間3,000人来院するクリニックの院長が開発</div>
+      <div class="hero-author">精神科医 × プロのSEが共同開発</div>
       <a href="#contact" class="hero-btn">📩 まずは無料相談</a>
     </div>
     <div>
@@ -377,7 +383,7 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
     <div class="section-label">FEATURES</div>
     <h2 class="section-title">PsyPaperが選ばれる理由</h2>
     <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon">🧠</div><div><div class="feature-title">精神科医が開発したシステム</div><div class="feature-desc">精神科医・ソーシャルワーカー・看護師が独自に開発。書式・文体を完全に再現。</div></div></div>
+      <div class="feature-card"><div class="feature-icon">🧠</div><div><div class="feature-title">精神科医が開発したシステム</div><div class="feature-desc">書類業務に追われた精神科医とプロのSEが二人三脚で開発。精神科の書式・文体を完全に再現。</div></div></div>
       <div class="feature-card"><div class="feature-icon">💰</div><div><div class="feature-title">ランニングコストは保守料のみ</div><div class="feature-desc">月額の保守料のみで継続利用可能。高額なAI利用料は不要。</div></div></div>
       <div class="feature-card"><div class="feature-icon">🔒</div><div><div class="feature-title">患者データはサーバーに残らない</div><div class="feature-desc">チャット上で完結するため患者情報が外部に蓄積されません。</div></div></div>
       <div class="feature-card"><div class="feature-icon">⚙️</div><div><div class="feature-title">クリニックに合わせてカスタマイズ</div><div class="feature-desc">導入時に診療スタイル・書式に合わせてカスタマイズ対応。改良版は常にアップデート。</div></div></div>
@@ -386,245 +392,308 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
 </section>
 
 <!-- ====== 比較セクション ====== -->
-<div class="compare-wrap">
-  <div class="section-eyebrow">LIVE COMPARISON</div>
-  <div class="section-title">実際の出力を見てください</div>
-  <div class="section-sub">同一患者カルテ（匿名化済み）から生成した紹介状を比較しています。<br>タブを切り替えて3パターンを確認してください。</div>
 
-  <div class="compare-intro">
-    <strong>【使用カルテ】</strong> 38歳男性・機械系商社勤務（営業職）。社交不安症・不眠症にて約2年間通院。東京転勤のため紹介状が必要になったケース。<br>
-    ※ 患者情報・紹介先はすべて<strong>匿名化済み</strong>
-  </div>
+<style>
 
-  <input type="radio" name="tabs" id="tab1" checked>
-  <input type="radio" name="tabs" id="tab2">
-  <input type="radio" name="tabs" id="tab3">
+/* DEMO ANIMATION */
+.demo-section { background: #111; padding: 80px 48px; }
+.demo-section .section-eyebrow { color: #3D8A62; }
+.demo-title { font-family: 'Noto Serif JP', serif; font-size: 32px; color: white; font-weight: 700; margin-bottom: 12px; }
+.demo-sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 48px; line-height: 1.8; }
 
-  <div class="tab-labels">
-    <label for="tab1">✅ PsyPaper（専門設定あり）</label>
-    <label for="tab2">⚠️ Claude（設定なし）</label>
-    <label for="tab3">❌ ChatGPT（設定なし）</label>
-  </div>
+.demo-flow { display: grid; grid-template-columns: 1fr 60px 1fr 60px 1fr; align-items: center; gap: 0; margin-bottom: 56px; }
+.demo-step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 24px; text-align: center; }
+.demo-step-icon { font-size: 32px; margin-bottom: 12px; }
+.demo-step-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #3D8A62; margin-bottom: 6px; font-weight: 700; }
+.demo-step-title { font-size: 15px; font-weight: 600; color: white; margin-bottom: 6px; }
+.demo-step-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.demo-arrow { text-align: center; font-size: 24px; color: rgba(255,255,255,0.3); }
+.demo-notice { background: rgba(200,168,107,0.15); border: 1px solid rgba(200,168,107,0.3); border-radius: 8px; padding: 14px 20px; font-size: 13px; color: rgba(200,168,107,0.9); margin-bottom: 48px; display: flex; align-items: center; gap: 10px; }
 
-  <div class="panels">
+/* SCREEN ANIMATION */
+.screen-wrap { position: relative; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; }
+.screen-topbar { background: rgba(255,255,255,0.06); padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+.screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+.screen-dot.r { background: #ff5f57; }
+.screen-dot.y { background: #ffbd2e; }
+.screen-dot.g { background: #28ca41; }
+.screen-body { padding: 24px; min-height: 320px; }
 
-    <div class="panel" id="p1">
-      <div class="doc-panel">
-        <div class="doc-hdr hg">✅ PsyPaper版 ― 精神科専門の設定あり（院独自のルールをAIに覚えさせた状態）</div>
-        <div class="doc-body">
-          <div class="dt">診療情報提供書</div>
-          <div class="dr">令和8年4月25日</div>
-          <div class="df">○○メンタルクリニック<br>精神科　○○　○○先生御机下</div>
-          <div class="df" style="margin-top:12px;">患者氏名：山田　太郎（やまだ　たろう）<span class="tg">ふりがな✓</span></div>
-          <div class="df">生年月日：昭和62年8月28日　　38歳　　男性</div>
-          <div class="df">住所：東京都○○区○○1-2-3　　電話番号：090-○○○○-○○○○</div>
-          <div class="df">職業：会社員（正社員）<span class="tg">雇用形態✓</span></div>
-          <div class="df" style="margin-top:12px;">傷病名：#1 社交不安症（SAD）<span class="tg">DSM-5準拠✓</span>　　#2 不眠症</div>
+/* Animation states */
+.anim-step { display: none; }
+.anim-step.active { display: block; }
 
-          <div class="st">紹介目的：転勤に伴う引き続きのご加療のお願い</div>
-          <div>平素より大変お世話になっております。<br>当院に通院中の山田太郎様ですが、東京への転勤のため、今後は貴院通院を希望されました。<br>つきましては引き続きのご加療をお願いしたく存じます。<br>お忙しいところ大変恐縮でございますが、どうぞよろしくお願い致します。</div>
+/* Step 1: カルテ貼り付け */
+.karte-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; font-family: 'Noto Serif JP', serif; font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 12px; }
+.karte-label { font-size: 10px; color: #3D8A62; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; font-family: 'DM Sans', sans-serif; }
+.paste-btn { background: #3D8A62; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 600; }
 
-          <div class="st">経過及び検査結果：<span class="tg">見出しなし・自然な一続きの文章✓</span></div>
-          <div>当院初診の約10年前に不眠症状にて精神科受診歴あり、薬剤名等は不詳。<br>　令和6年6月1日に初診。1〜2ヶ月前より中途覚醒・早朝覚醒、打ち合わせ前や美容院などの特定場面での吐き気・不安感を主訴に受診。元来不安を感じやすい性格であり、令和6年3月頃より仕事が繁忙となったことを契機に症状増悪。エスシタロプラム10mg・睡眠薬にて加療開始。その後用量調整を重ね睡眠の安定を得た。令和7年以降は概ね症状落ち着いており、令和8年1月に頓服薬を中止した。<br>　この度、東京への転勤にともないご紹介させていただく運びとなりました。内服の継続により夜間睡眠を概ね確保できており、気分の落ち込みも目立ちません。<br>ご多忙のところ大変恐縮ではございますが、今後のご加療のほどどうぞよろしくお願いいたします。<span class="tg">院の定型締め文✓</span></div>
-          <div class="ng">✅ 見出しなし・一続きの文章で記載。精神科受診歴→発症経緯→治療経過→転院理由→現在の状態→締め文の流れを順守。</div>
+/* Step 2: 生成中 */
+.generating { text-align: center; padding: 40px 20px; }
+.spinner { width: 48px; height: 48px; border: 3px solid rgba(61,138,98,0.3); border-top-color: #3D8A62; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.gen-title { font-size: 16px; color: white; font-weight: 600; margin-bottom: 8px; }
+.gen-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
+.gen-bar { background: rgba(255,255,255,0.1); border-radius: 20px; height: 4px; margin: 20px 0; overflow: hidden; }
+.gen-bar-inner { height: 100%; background: #3D8A62; border-radius: 20px; animation: progress 90s linear forwards; }
+@keyframes progress { from { width: 0%; } to { width: 95%; } }
+.gen-steps { text-align: left; margin-top: 16px; }
+.gen-step-item { font-size: 12px; color: rgba(255,255,255,0.5); padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+.gen-step-item.done { color: #3D8A62; }
+.gen-step-item.active { color: white; }
 
-          <div class="st">現在の処方：</div>
-          <div class="ind">【内服薬】<br>
-          エスシタロプラム錠20mg　1錠　<span class="tg">1日1回　夕食後✓</span><br>
-          トラゾドン塩酸塩錠50mg「アメル」　1錠　<span class="tg">1日1回　就寝前✓</span><br>
-          クービビック錠50mg　1錠　<span class="tg">1日1回　就寝前✓</span></div>
-          <div class="ng">✅ 処方の書き方：薬剤名→用量→錠数→1日○回→服用タイミングの順（院ルール通り）</div>
+/* Step 3: 完成 */
+.result-doc { background: white; border-radius: 8px; padding: 20px; font-family: 'Noto Serif JP', serif; font-size: 11px; line-height: 1.9; color: #1a1a1a; }
+.result-title { text-align: center; font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+.result-field { margin-bottom: 6px; }
+.result-section { font-weight: 700; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin: 12px 0 8px; font-size: 12px; }
+.result-badge { display: inline-block; background: #e8f5ee; color: #2a6347; font-size: 9px; padding: 1px 6px; border-radius: 3px; margin-left: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; }
+.result-time { text-align: center; margin-top: 16px; padding: 10px; background: #f0f7f3; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: #2a6347; font-weight: 700; }
 
-          <div class="cl">
-            <div class="cl-t">品質チェック</div>
-            <div class="ci"><div class="ic ok">✓</div><div>経過欄に見出し（【　】）なし・読みやすい一続きの文章</div></div>
-            <div class="ci"><div class="ic ok">✓</div><div>院が決めた締めの一文を一字一句正確に使用</div></div>
-            <div class="ci"><div class="ic ok">✓</div><div>処方の書き順が正しい（1日○回→服用タイミング）</div></div>
-            <div class="ci"><div class="ic ok">✓</div><div>記載する必要がない検査結果は記載なし</div></div>
-            <div class="ci"><div class="ic ok">✓</div><div>挨拶文の重複なし</div></div>
-            <div class="ci"><div class="ic ok">✓</div><div>ふりがな・診断基準・雇用形態すべて記載</div></div>
+/* TAB controls (reuse existing) */
+.demo-tabs { margin-top: 48px; }
+.demo-tab-row { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+#dtab1, #dtab2, #dtab3 { display: none; }
+.demo-tab-labels label { padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5); transition: all 0.15s; display: inline-block; margin-right: 8px; margin-bottom: 8px; }
+#dtab1:checked ~ .demo-tab-labels label[for="dtab1"] { background: #3D8A62; color: white; border-color: #3D8A62; }
+#dtab2:checked ~ .demo-tab-labels label[for="dtab2"] { background: #2a6347; color: white; border-color: #2a6347; }
+#dtab3:checked ~ .demo-tab-labels label[for="dtab3"] { background: #1a4a30; color: white; border-color: #1a4a30; }
+.demo-panels .dpanel { display: none; }
+#dtab1:checked ~ .demo-panels #dp1 { display: block; }
+#dtab2:checked ~ .demo-panels #dp2 { display: block; }
+#dtab3:checked ~ .demo-panels #dp3 { display: block; }
+
+.case-doc { background: white; border-radius: 12px; padding: 32px 40px; font-family: 'Noto Serif JP', serif; font-size: 13px; line-height: 2.2; color: #1a1a1a; }
+.case-title { text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+.case-right { text-align: right; margin-bottom: 10px; font-size: 13px; }
+.case-field { margin-bottom: 8px; }
+.case-sec { font-weight: 700; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin: 16px 0 10px; font-size: 14px; }
+.case-tag { display: inline-block; background: #e8f5ee; color: #2a6347; font-size: 10px; padding: 2px 6px; border-radius: 3px; margin-left: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; }
+.case-indent { padding-left: 16px; }
+.case-label { display: inline-block; background: #111; color: #3D8A62; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 1px; font-family: 'DM Sans', sans-serif; }
+.case-time { display: inline-block; background: #3D8A62; color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-left: 8px; font-family: 'DM Sans', sans-serif; }
+
+</style>
+
+<!-- DEMO ANIMATION SECTION -->
+<div class="demo-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-eyebrow">HOW IT WORKS</div>
+    <div class="demo-title">カルテを貼るだけ。<br>1〜3分で書類が完成。</div>
+    <div class="demo-sub">専門的な操作は一切不要。コピー&ペーストだけで、<br>院のルールに沿った下書きが自動で完成します。</div>
+
+    <div class="demo-notice">
+      ⚠️ AIがカルテを読み込む処理に1〜3分ほどかかります。生成中はそのままお待ちください。
+    </div>
+
+    <div class="demo-flow">
+      <div class="demo-step">
+        <div class="demo-step-icon">📋</div>
+        <div class="demo-step-label">STEP 01</div>
+        <div class="demo-step-title">カルテをコピー</div>
+        <div class="demo-step-desc">電子カルテの記録をそのままコピーするだけ</div>
+      </div>
+      <div class="demo-arrow">→</div>
+      <div class="demo-step">
+        <div class="demo-step-icon">⚡</div>
+        <div class="demo-step-label">STEP 02</div>
+        <div class="demo-step-title">AIに貼り付け</div>
+        <div class="demo-step-desc">Claudeのチャット画面に貼り付けて送信（1〜3分）</div>
+      </div>
+      <div class="demo-arrow">→</div>
+      <div class="demo-step">
+        <div class="demo-step-icon">✅</div>
+        <div class="demo-step-label">STEP 03</div>
+        <div class="demo-step-title">下書き完成</div>
+        <div class="demo-step-desc">院のルール通りの書類が自動で出力される</div>
+      </div>
+    </div>
+
+    <!-- アニメーション画面 -->
+    <div class="screen-wrap">
+      <div class="screen-topbar">
+        <div class="screen-dot r"></div>
+        <div class="screen-dot y"></div>
+        <div class="screen-dot g"></div>
+        <span style="font-size:12px;color:rgba(255,255,255,0.3);margin-left:8px;">Claude.ai — PsyPaper 紹介状作成</span>
+      </div>
+      <div class="screen-body">
+        <!-- Step 1 -->
+        <div class="anim-step active" id="anim1">
+          <div class="karte-label">📋 カルテ（2号紙）をコピー&ペースト</div>
+          <div class="karte-box">
+【基本情報】R8.02.22　西山扶　精神科<br>
+(再診) 院外処方 社保本<br>
+&lt;症状&gt;<br>
+　体調は変わりないです<br>
+　東京への転勤が決まりました<br>
+　急に決まった<br>
+　あまり行きたくないけど、しょうがないと思っている<br>
+&lt;書類&gt;<br>
+　診療情報提供書<br>
+　○○メンタルクリニック 宛<br>
+　○○先生
+          </div>
+          <button class="paste-btn" onclick="startAnim()">▶ 送信して生成開始</button>
+        </div>
+
+        <!-- Step 2: 生成中 -->
+        <div class="anim-step" id="anim2">
+          <div class="generating">
+            <div class="spinner"></div>
+            <div class="gen-title">カルテを読み込み中...</div>
+            <div class="gen-sub">院のルールに沿って書類を作成しています</div>
+            <div class="gen-bar"><div class="gen-bar-inner" id="progbar"></div></div>
+            <div class="gen-steps">
+              <div class="gen-step-item done" id="gs1">✓ カルテ情報を解析</div>
+              <div class="gen-step-item active" id="gs2">⟳ 患者情報・傷病名を整理中...</div>
+              <div class="gen-step-item" id="gs3">　 経過欄を作成</div>
+              <div class="gen-step-item" id="gs4">　 処方・締め文を追加</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: 完成 -->
+        <div class="anim-step" id="anim3">
+          <div class="result-doc">
+            <div class="result-title">診療情報提供書</div>
+            <div style="text-align:right;font-size:11px;margin-bottom:8px;">令和8年2月22日</div>
+            <div class="result-field">○○メンタルクリニック<br>精神科　○○　○○先生御机下</div>
+            <div style="margin-top:10px;" class="result-field">患者氏名：山田　太郎（やまだ　たろう）　38歳　男性</div>
+            <div class="result-field">傷病名：#1 社交不安症（SAD）　#2 不眠症</div>
+            <div class="result-section">紹介目的</div>
+            <div style="font-size:11px;">平素より大変お世話になっております。当院通院中の山田太郎様ですが、東京への転勤のため今後は貴院通院を希望されました。引き続きのご加療をお願いしたく存じます。</div>
+            <div class="result-section">現在の処方</div>
+            <div style="font-size:11px;">エスシタロプラム錠20mg　1錠　1日1回　夕食後<br>トラゾドン塩酸塩錠50mg　1錠　1日1回　就寝前<br>クービビック錠50mg　1錠　1日1回　就寝前</div>
+            <div class="result-time">✅ 生成完了 — 約2分で下書き完成</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="panel" id="p2">
-      <div class="doc-panel">
-        <div class="doc-hdr ho">⚠️ Claude（設定なし）版 ― AIに何も覚えさせていない状態</div>
-        <div class="doc-body">
-          <div class="dt">診療情報提供書（紹介状）</div>
-          <div class="dr">作成日：令和8年4月25日</div>
-          <div class="df">宛先：○○メンタルクリニック　○○　○○先生</div>
-          <div class="df" style="margin-top:12px;">氏名：山田 太郎　<span class="tb">ふりがななし✗</span></div>
-          <div class="df">年齢：38歳　性別：男性　職業：営業職　<span class="tb">雇用形態なし✗</span></div>
-          <div class="df"><span class="tb">DSM-5記載なし✗</span>　病名：社交不安障害、不眠症</div>
+    <!-- 疾病パターン別サンプル -->
+    <div class="demo-tabs">
+      <div style="margin-bottom:16px;">
+        <div class="section-eyebrow" style="color:#3D8A62;margin-bottom:8px;">SAMPLE OUTPUT</div>
+        <div style="font-family:'Noto Serif JP',serif;font-size:24px;color:white;font-weight:700;margin-bottom:8px;">疾患パターン別の生成サンプル</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:24px;">同じシステムが、どんな疾患でも院のルール通りに出力します。</div>
+      </div>
 
-          <div class="st bad">【発症前経過・背景】<span class="tb">見出し禁止✗</span></div>
-          <div>令和6年3月頃より仕事が多忙となり睡眠の乱れや緊張感が生じるようになりました。</div>
-          <div class="nb">❌ 経過欄の見出し【発症前経過・背景】は使用禁止。見出しを使うと読みにくく、院の書式と異なる。</div>
+      <input type="radio" name="dtabs" id="dtab1" checked>
+      <input type="radio" name="dtabs" id="dtab2">
+      <input type="radio" name="dtabs" id="dtab3">
 
-          <div class="st bad">【当院受診経過】<span class="tb">見出し禁止✗</span></div>
-          <div>令和6年6月1日に初診。中途覚醒・早朝覚醒、吐き気・不安を主訴とされていました。<br>
-          <span class="tb">心理検査：CES-D 15点（軽度うつ傾向）、バウムテスト実施✗</span></div>
-          <div class="nb">❌ CES-D・バウムテストは紹介状に記載する必要がない項目。設定がないと書いてしまう。</div>
+      <div class="demo-tab-labels">
+        <label for="dtab1">うつ病・適応障害</label>
+        <label for="dtab2">発達障害（ADHD）</label>
+        <label for="dtab3">統合失調症</label>
+      </div>
 
-          <div class="st">現在の処方</div>
-          <div class="ind">①エスシタロプラム錠20mg　<span class="tb">夕食後（1日1回）← 書き順が逆✗</span><br>
-          ②トラゾドン塩酸塩錠50mg　<span class="tb">就寝前（1日1回）← 書き順が逆✗</span><br>
-          ③クービビック錠50mg　<span class="tb">就寝前（1日1回）← 書き順が逆✗</span></div>
-          <div class="nb">❌ 処方の書き順が逆（院のルールは「1日○回→タイミング」の順）</div>
+      <div class="demo-panels">
 
-          <div style="margin-top:16px;"><span class="tb">何卒よろしくお願い申し上げます。✗</span></div>
-          <div class="nb">❌ 院が決めた締めの一文ではない。毎回違う文になってしまう。</div>
+        <!-- Case 1: うつ病・適応障害 -->
+        <div class="dpanel" id="dp1">
+          <div class="case-doc">
+            <div style="margin-bottom:16px;">
+              <span class="case-label">CASE 01</span>
+              <span class="case-time">⏱ 約1分30秒で生成</span>
+            </div>
+            <div class="case-title">診療情報提供書</div>
+            <div class="case-right">令和8年4月○日</div>
+            <div class="case-field">○○クリニック<br>精神科　○○先生御机下</div>
+            <div style="margin-top:12px;" class="case-field">患者氏名：鈴木　花子（すずき　はなこ）<span class="case-tag">ふりがな✓</span>　35歳　女性</div>
+            <div class="case-field">職業：会社員（正社員）<span class="case-tag">雇用形態✓</span></div>
+            <div class="case-field" style="margin-top:8px;">傷病名：#1 うつ病（F32）<span class="case-tag">ICD-10✓</span>　　#2 不眠症</div>
 
-          <div class="cl">
-            <div class="cl-t">品質チェック</div>
-            <div class="ci"><div class="ic nk">✗</div><div>【発症前経過】【当院受診経過】など見出しを使用してしまう</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>院が決めた締めの一文を使用していない</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>処方の書き順が逆になってしまう</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>記載する必要がない検査結果まで書いてしまう</div></div>
-            <div class="ci"><div class="ic wk">△</div><div>挨拶文の重複はなし</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>ふりがな・診断基準・雇用形態が抜ける</div></div>
+            <div class="case-sec">紹介目的：転居に伴う引き続きのご加療のお願い</div>
+            <div>平素より大変お世話になっております。当院に通院中の鈴木花子様ですが、転居のため今後は貴院通院を希望されました。つきましては引き続きのご加療をお願いしたく存じます。お忙しいところ大変恐縮でございますが、どうぞよろしくお願い致します。</div>
+
+            <div class="case-sec">経過及び検査結果：</div>
+            <div>当院初診まで精神科受診歴なし。<br>　令和5年10月、直属上司からのハラスメントを契機に抑うつ気分・意欲低下・中途覚醒が出現し当院を受診。初診時よりうつ病と診断し、エスシタロプラム10mgにて加療を開始した。令和6年2月に同剤を20mgへ増量し抑うつ症状は改善傾向となった。職場環境の調整も経て令和6年9月より復職し、現在は安定した状態で就労を継続している。<br>　この度、転居に伴いご紹介させていただく運びとなりました。気分の落ち込みは概ね消退しており、睡眠も安定しています。ご多忙のところ大変恐縮ではございますが、今後のご加療のほどどうぞよろしくお願いいたします。</div>
+
+            <div class="case-sec">現在の処方：</div>
+            <div class="case-indent">エスシタロプラム錠20mg　1錠　1日1回　夕食後<span class="case-tag">書き順✓</span><br>
+            トラゾドン塩酸塩錠25mg　1錠　1日1回　就寝前<span class="case-tag">書き順✓</span></div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="panel" id="p3">
-      <div class="doc-panel">
-        <div class="doc-hdr hr">❌ ChatGPT版 ― 一般的なAIで作成した場合</div>
-        <div class="doc-body">
-          <div class="dt">診療情報提供書</div>
-          <div class="ds">〜 紹介状 〜　<span class="tb">不要な装飾✗</span></div>
-          <div class="dr">令和8年4月25日</div>
+        <!-- Case 2: 発達障害 ADHD -->
+        <div class="dpanel" id="dp2">
+          <div class="case-doc">
+            <div style="margin-bottom:16px;">
+              <span class="case-label">CASE 02</span>
+              <span class="case-time">⏱ 約2分で生成</span>
+            </div>
+            <div class="case-title">診療情報提供書</div>
+            <div class="case-right">令和8年4月○日</div>
+            <div class="case-field">○○メンタルクリニック<br>精神科　○○先生御机下</div>
+            <div style="margin-top:12px;" class="case-field">患者氏名：田中　健太（たなか　けんた）<span class="case-tag">ふりがな✓</span>　28歳　男性</div>
+            <div class="case-field">職業：会社員（契約社員）<span class="case-tag">雇用形態✓</span></div>
+            <div class="case-field" style="margin-top:8px;">傷病名：#1 注意欠如・多動症（ADHD）〔不注意優勢型〕DSM-5準拠<span class="case-tag">DSM-5✓</span></div>
 
-          <div style="margin-bottom:14px;"><span class="tb">拝啓、時下ますますご清栄のこととお喜び申し上げます。✗</span><br>平素より大変お世話になっております。この度は患者様をご紹介申し上げます。</div>
-          <div class="nb">❌ 医療文書に不要な手紙の書き出し「拝啓・ご清栄」。さらに後の欄でも挨拶文が重複してしまう。</div>
+            <div class="case-sec">紹介目的：転勤に伴う引き続きのご加療のお願い</div>
+            <div>平素より大変お世話になっております。当院に通院中の田中健太様ですが、転勤のため今後は貴院通院を希望されました。つきましては引き続きのご加療をお願いしたく存じます。お忙しいところ大変恐縮でございますが、どうぞよろしくお願い致します。</div>
 
-          <div class="st bad">■患者基本情報　<span class="tb">独自の書式✗</span></div>
-          <div>お名前：山田 太郎 様　性別：男性　年齢：38歳<br>
-          <span class="tb">ふりがななし✗　　生年月日なし✗　　雇用形態なし✗</span></div>
+            <div class="case-sec">経過及び検査結果：</div>
+            <div>福岡県北九州市にて同胞2名中第1子（長男）として出生。幼少期より忘れ物・失くし物が多く、授業中の離席も目立った。大学在学中に受診歴はなく、就職後に業務上のミスが頻発したことを機に受診。令和5年3月、当院初診。WAIS-Ⅳ（令和5年4月当院施行）：FSIQ 98、WMI 78、PSI 72と処理速度・ワーキングメモリの低下を認め、ADHDと診断した。コンサータ18mgにて加療を開始し、以降36mgまで増量した。内服継続により業務上のミスが減少し、就労が安定している。<br>　この度、転勤に伴いご紹介させていただく運びとなりました。現在は症状安定しており、就労継続できています。ご多忙のところ大変恐縮ではございますが、今後のご加療のほどどうぞよろしくお願いいたします。</div>
 
-          <div class="st bad">■現病歴・経過</div>
-          <div><span class="tb">【発症のきっかけ】✗</span><br>令和6年3月頃から仕事が多忙に…<br><br>
-          <span class="tb">【初診時の状態（令和6年6月1日）】✗</span><br>
-          主訴：中途覚醒・早朝覚醒・吐き気・対人緊張<br>
-          <span class="tb">心理検査：CES-D 15点（軽度うつ傾向）、バウムテスト実施✗</span><br><br>
-          <span class="tb">【治療経過】✗</span><br>エスシタロプラム・睡眠薬にて治療開始…</div>
-          <div class="nb">❌ ■と【】の二重見出し。CES-D・バウムテスト記載。情報が細切れで読みにくい。</div>
-
-          <div class="st bad">■現在の内服薬</div>
-          <div class="ind">1. エスシタロプラム錠20mg　<span class="tb">夕食後1錠（毎日）✗</span><br>
-          2. トラゾドン塩酸塩錠50mg　<span class="tb">就寝前1錠（毎日）✗</span><br>
-          3. クービビック錠50mg　<span class="tb">就寝前1錠（毎日）✗</span></div>
-          <div class="nb">❌ 処方の書き方・順序が院のルールと異なる。「毎日」は不要な記述。</div>
-
-          <div style="margin-top:16px;"><span class="tb">どうぞよろしくお願い申し上げます。敬具✗</span></div>
-          <div class="nb">❌「敬具」は医療文書に不適切。院の締め文未使用。</div>
-
-          <div class="cl">
-            <div class="cl-t">品質チェック</div>
-            <div class="ci"><div class="ic nk">✗</div><div>「拝啓・敬具」など手紙の書き方が混じってしまう</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>■・【】の二重見出しで読みにくい</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>処方の書き方・順序が院のルールと異なる</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>記載する必要がない検査結果まで書いてしまう</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>挨拶文が冒頭と本文で重複してしまう</div></div>
-            <div class="ci"><div class="ic nk">✗</div><div>ふりがな・診断基準・生年月日が抜ける</div></div>
+            <div class="case-sec">現在の処方：</div>
+            <div class="case-indent">コンサータ錠36mg　1錠　1日1回　朝食後<span class="case-tag">書き順✓</span></div>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
-</div>
+        <!-- Case 3: 統合失調症 -->
+        <div class="dpanel" id="dp3">
+          <div class="case-doc">
+            <div style="margin-bottom:16px;">
+              <span class="case-label">CASE 03</span>
+              <span class="case-time">⏱ 約2分30秒で生成</span>
+            </div>
+            <div class="case-title">診療情報提供書</div>
+            <div class="case-right">令和8年4月○日</div>
+            <div class="case-field">○○精神科クリニック<br>精神科　○○先生御机下</div>
+            <div style="margin-top:12px;" class="case-field">患者氏名：佐藤　次郎（さとう　じろう）<span class="case-tag">ふりがな✓</span>　42歳　男性</div>
+            <div class="case-field">職業：無職（令和4年3月退職時点）<span class="case-tag">時点明記✓</span></div>
+            <div class="case-field" style="margin-top:8px;">傷病名：#1 統合失調症（F20）<span class="case-tag">ICD-10✓</span></div>
 
-<!-- BEFORE AFTER -->
-<div class="ba-section">
-  <div class="section-eyebrow" style="color:#3D8A62;">BEFORE / AFTER</div>
-  <div class="ba-title">同じ箇所を並べると、差は一目瞭然。</div>
-  <div class="ba-sub">専門設定がないと、どこが崩れるのか。</div>
-  <div class="ba-grid">
-    <div class="ba-col">
-      <div class="ba-hdr before">❌ ChatGPT / Claude（設定なし）</div>
-      <div class="ba-body before">
-        <span class="bb">拝啓、時下ますますご清栄のこととお喜び申し上げます。</span><br>
-        <div class="bn">↑ 医療文書に不要な書き出し</div><br>
-        <span class="bb">【発症前経過・背景】<br>【当院受診経過】</span><br>
-        <div class="bn">↑ 見出しを使ってしまう（禁止）</div><br>
-        <span class="bb">CES-D 15点（軽度うつ傾向）、バウムテスト実施</span><br>
-        <div class="bn">↑ 記載不要な項目まで書いてしまう</div><br>
-        エスシタロプラム錠20mg　<span class="bb">夕食後（1日1回）</span><br>
-        <div class="bn">↑ 処方の書き順が逆</div><br>
-        <span class="bb">どうぞよろしくお願い申し上げます。敬具</span><br>
-        <div class="bn">↑ 院の締め文ではない・毎回バラバラになる</div>
-      </div>
-    </div>
-    <div class="ba-col">
-      <div class="ba-hdr after">✅ PsyPaper（専門設定あり）</div>
-      <div class="ba-body after">
-        平素より大変お世話になっております。<br>当院に通院中の山田太郎様ですが…<br>
-        <div class="bng">↑ 院が決めた挨拶文のみ。手紙調なし。</div><br>
-        （見出しなし・一続きの文章で自然に記載）<br>
-        <div class="bng">↑ 読み手に優しい・院の書式通り</div><br>
-        （CES-D・バウムテストの記載なし）<br>
-        <div class="bng">↑ 記載不要な項目は自動的に除外</div><br>
-        エスシタロプラム錠20mg　<span class="bg">1日1回　夕食後</span><br>
-        <div class="bng">↑ 正しい書き順（回数→タイミング）</div><br>
-        <span class="bg">ご多忙のところ大変恐縮ではございますが、今後のご加療のほどどうぞよろしくお願いいたします。</span><br>
-        <div class="bng">↑ 毎回必ず同じ締め文。院の品質統一。</div>
+            <div class="case-sec">紹介目的：家族との同居に伴う引き続きのご加療のお願い</div>
+            <div>平素より大変お世話になっております。当院に通院中の佐藤次郎様ですが、家族との同居のため今後は貴院通院を希望されました。つきましては引き続きのご加療をお願いしたく存じます。お忙しいところ大変恐縮でございますが、どうぞよろしくお願い致します。</div>
+
+            <div class="case-sec">経過及び検査結果：</div>
+            <div>令和元年、20歳代後半に前医にて統合失調症と診断され加療が開始された。前医での治療経過の詳細は不明だが、令和3年より当院に転院となった。転院時、リスペリドン4mgが処方されていた。転院後、陽性症状（幻聴・被害念慮）は概ね消退しており、オランザピン10mgへの変更を経て現在は症状安定している。精神障害者保健福祉手帳2級を取得済み（令和5年交付）、自立支援医療も申請済みである。<br>　この度、家族との同居に伴いご紹介させていただく運びとなりました。現在は陽性症状なく、生活は安定しております。ご多忙のところ大変恐縮ではございますが、今後のご加療のほどどうぞよろしくお願いいたします。</div>
+
+            <div class="case-sec">現在の処方：</div>
+            <div class="case-indent">オランザピン錠10mg　1錠　1日1回　就寝前<span class="case-tag">書き順✓</span></div>
+
+            <div class="case-sec">備考：</div>
+            <div>精神障害者保健福祉手帳2級・自立支援医療（精神通院）申請済みです。手帳写しを同封いたします。</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
-<!-- SCORE -->
-<div class="score-section">
-  <div class="section-eyebrow">QUALITY SCORE</div>
-  <div class="section-title">品質スコア比較</div>
-  <div class="section-sub">院のルール6項目で採点した結果です。</div>
-  <div class="score-grid">
-    <div class="sc">
-      <div class="sc-hdr g">✅ PsyPaper（専門設定あり）</div>
-      <div class="sc-body">
-        <div class="sc-big"><span class="sc-num g">6</span><span class="sc-unit"> / 6項目</span></div>
-        <div class="sc-row"><span class="sc-label">見出しなし・自然な文章</span><span class="sc-v g">✓</span></div>
-        <div class="sc-row"><span class="sc-label">院の締め文</span><span class="sc-v g">✓</span></div>
-        <div class="sc-row"><span class="sc-label">処方の書き順</span><span class="sc-v g">✓</span></div>
-        <div class="sc-row"><span class="sc-label">禁止項目の除外</span><span class="sc-v g">✓</span></div>
-        <div class="sc-row"><span class="sc-label">挨拶文の重複なし</span><span class="sc-v g">✓</span></div>
-        <div class="sc-row"><span class="sc-label">患者情報の完備</span><span class="sc-v g">✓</span></div>
-      </div>
-    </div>
-    <div class="sc">
-      <div class="sc-hdr o">⚠️ Claude（設定なし）</div>
-      <div class="sc-body">
-        <div class="sc-big"><span class="sc-num o">1</span><span class="sc-unit"> / 6項目</span></div>
-        <div class="sc-row"><span class="sc-label">見出しなし・自然な文章</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">院の締め文</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">処方の書き順</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">禁止項目の除外</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">挨拶文の重複なし</span><span class="sc-v o">△</span></div>
-        <div class="sc-row"><span class="sc-label">患者情報の完備</span><span class="sc-v r">✗</span></div>
-      </div>
-    </div>
-    <div class="sc">
-      <div class="sc-hdr r">❌ ChatGPT（設定なし）</div>
-      <div class="sc-body">
-        <div class="sc-big"><span class="sc-num r">0</span><span class="sc-unit"> / 6項目</span></div>
-        <div class="sc-row"><span class="sc-label">見出しなし・自然な文章</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">院の締め文</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">処方の書き順</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">禁止項目の除外</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">挨拶文の重複なし</span><span class="sc-v r">✗</span></div>
-        <div class="sc-row"><span class="sc-label">患者情報の完備</span><span class="sc-v r">✗</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ====== /比較セクション ====== -->
-
+<script>
+function startAnim() {
+  document.getElementById('anim1').classList.remove('active');
+  document.getElementById('anim2').classList.add('active');
+  // progress steps
+  setTimeout(() => {
+    document.getElementById('gs2').className = 'gen-step-item done';
+    document.getElementById('gs3').className = 'gen-step-item active';
+  }, 20000);
+  setTimeout(() => {
+    document.getElementById('gs3').className = 'gen-step-item done';
+    document.getElementById('gs4').className = 'gen-step-item active';
+  }, 60000);
+  setTimeout(() => {
+    document.getElementById('anim2').classList.remove('active');
+    document.getElementById('anim3').classList.add('active');
+  }, 90000);
+}
+</script>
 <section class="pricing-section">
   <div class="section-inner">
     <div class="section-label">PRICING</div>
@@ -634,8 +703,8 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
       <div class="price-card featured">
         <div class="price-badge">先着10院限定</div>
         <div class="price-type">導入費用（初回のみ）</div>
-        <div class="price-amount">60万円</div>
-        <div class="price-orig">通常 90万円（30万円OFF・税別）</div>
+        <div class="price-amount">ASK</div>
+        <div class="price-orig" style="color:rgba(255,255,255,0.6);font-size:12px;">書類の量・種類・頻度により変動します</div>
         <ul class="price-items">
           <li>AIへの専門設定・納品</li>
           <li>Zoomレクチャー（30分）</li>
@@ -644,7 +713,7 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
       </div>
       <div class="price-card">
         <div class="price-type">月額（継続サポート）</div>
-        <div class="price-amount">5万円</div>
+        <div class="price-amount">3万円</div>
         <div class="price-orig" style="color:rgba(255,255,255,0.25);">税別 / 月払い</div>
         <ul class="price-items">
           <li>設定の定期改善</li>
@@ -691,8 +760,8 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
         </div>
       </div>
       <div>
-        <div class="section-title" style="font-size:1.4rem;">月間3,000人来院するクリニックの院長が、書類業務に限界を感じて自ら開発</div>
-        <p class="profile-story">「これだけの時間があれば、もっと患者さんと向き合えるのに。」<br><br>精神科医として開業して、ずっとそう思っていた。<br>だから、精神科医・ソーシャルワーカー・看護師が力を合わせて開発した。</p>
+        <div class="section-title" style="font-size:1.4rem;">書類業務に追われる精神科医と、プロのSEがタッグを組んで開発</div>
+        <p class="profile-story">「これだけの時間があれば、もっと患者さんと向き合えるのに。」<br><br>精神科医として開業して、ずっとそう思っていた。<br>だから、プロのSEと二人三脚で作り上げた。</p>
         <table class="history-table">
           <tr><td>2014年</td><td>東海大学医学部医学科 卒業</td></tr>
           <tr><td>2014年</td><td>東京慈恵会医科大学附属病院 初期研修</td></tr>
@@ -717,6 +786,3 @@ body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #1a1a1a; 
 <footer>
   <div class="footer-logo">
     <div class="logo-box"><span>Ps</span></di
-このコードを入力する前に、必ず dashboard.stripe.com にアクセスしていることを確認してください。Stripe サポート窓口や Stripe の従業員を含め、誰にもコードを伝えないでください。
-
-あなたのコード: stre-syml-nvnl-vpcs-kvwr
